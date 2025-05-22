@@ -1,9 +1,16 @@
-import React from 'react'
+// src/components/Logo.jsx
+import React from 'react';
 
-function Logo({width = '100px'}) {
+const Logo = () => {
   return (
-    <div>Logo</div>
-  )
-}
+    <img
+      src="https://img.icons8.com/plasticine/100/resume-website.png"
+      alt="Logo"
+      width={60}
+      height={60}
+      style={{ display: 'block' }}
+    />
+  );
+};
 
-export default Logo
+export default Logo;
