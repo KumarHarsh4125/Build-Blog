@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import appwriteService from "../appWrite/config";
 import { Container, PostCard } from '../components'
+import { useSelector } from 'react-redux';
 
 function Home() {
     const [posts, setPosts] = useState([])
     const navigate = useNavigate();
+    const userData = useSelector((state) => state.auth.userData);
+    const firstName = userData?.name ? userData.name.split(' ')[0] : 'Writer';
 
     useEffect(() => {
         appwriteService.getPosts().then((posts) => {
@@ -56,7 +59,7 @@ function Home() {
                 <Container>
                     <div className="max-w-3xl">
                         <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                            Welcome back, Writer!
+                            Welcome back, {firstName}!
                         </h1>
                         <p className="text-slate-400 text-lg md:text-xl mb-10">
                             Discover the latest insights from the community or share your own thoughts today.

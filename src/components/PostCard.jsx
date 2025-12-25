@@ -1,8 +1,13 @@
 import React from "react";
 import appwriteService from "../appWrite/config";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function PostCard({ $id, title, featuredImage, userId }) {
+  const userData = useSelector((state) => state.auth.userData);
+  const isCurrentUser = userData?.$id === userId;
+  const firstName = userData?.name ? userData.name.split(' ')[0] : 'Author';
+
   return (
     <Link to={`/post/${$id}`}>
       <div className="w-full bg-white border border-slate-200 rounded-2xl p-3 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 group h-full flex flex-col">
@@ -23,7 +28,7 @@ function PostCard({ $id, title, featuredImage, userId }) {
               onClick={(e) => e.stopPropagation()}
               className="hover:text-primary transition-colors"
             >
-              By Author
+              By {isCurrentUser ? firstName : "Author"}
             </Link>
             <span className="mx-2">•</span>
             <span>5 min read</span>

@@ -13,6 +13,7 @@ export default function Post() {
   const userData = useSelector((state) => state.auth.userData);
 
   const isAuthor = post && userData ? post.userId === userData.$id : false;
+  const firstName = userData?.name ? userData.name.split(' ')[0] : 'Author';
 
   useEffect(() => {
     if (slug) {
@@ -72,7 +73,7 @@ export default function Post() {
             </h1>
             <div className="flex items-center justify-center text-slate-500 font-medium tracking-wide uppercase text-sm">
               <Link to={`/author/${post.userId}`} className="hover:text-primary transition-colors">
-                Published by Author
+                Published by {isAuthor ? firstName : "Author"}
               </Link>
               <span className="mx-3 text-slate-300">|</span>
               <span>5 Min Read</span>

@@ -12,6 +12,7 @@ function AuthorPosts() {
     const userData = useSelector((state) => state.auth.userData)
 
     const isCurrentUser = userData?.$id === userId;
+    const firstName = userData?.name ? userData.name.split(' ')[0] : 'Author';
 
     useEffect(() => {
         if (userId) {
@@ -39,7 +40,7 @@ function AuthorPosts() {
                         Back
                     </button>
                     <h1 className="text-4xl font-extrabold text-slate-800 tracking-tight">
-                        {isCurrentUser ? "My " : "Posts by "}
+                        {isCurrentUser ? `${firstName}'s ` : "Posts by "}
                         <span className="text-primary">{isCurrentUser ? "Stories" : "Author"}</span>
                     </h1>
                     <p className="text-slate-500 mt-2 italic">
