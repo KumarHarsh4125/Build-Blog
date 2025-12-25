@@ -33,32 +33,54 @@ export default function Post() {
   };
 
   return post ? (
-    <div className="py-8">
+    <div className="py-12 bg-white min-h-screen">
       <Container>
-        <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
-          <img
-            src={appwriteService.getFilePreview(post.featuredImage)}
-            alt={post.title}
-            className="rounded-xl"
-          />
+        <div className="max-w-4xl mx-auto">
+          <button
+            onClick={() => navigate(-1)}
+            className="mb-6 flex items-center text-slate-500 hover:text-primary transition-colors font-semibold group"
+          >
+            <svg className="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            Back
+          </button>
+          <div className="w-full mb-8 relative rounded-3xl overflow-hidden shadow-2xl">
+            <img
+              src={appwriteService.getFilePreview(post.featuredImage)}
+              alt={post.title}
+              className="w-full object-cover max-h-[500px]"
+            />
 
-          {isAuthor && (
-            <div className="absolute right-6 top-6">
-              <Link to={`/edit-post/${post.$id}`}>
-                <Button bgColor="bg-green-500" className="mr-3">
-                  Edit
+            {isAuthor && (
+              <div className="absolute right-6 top-6 flex space-x-2">
+                <Link to={`/edit-post/${post.$id}`}>
+                  <Button bgColor="bg-green-500 hover:bg-green-600 shadow-lg" className="px-6 rounded-full">
+                    Edit
+                  </Button>
+                </Link>
+                <Button bgColor="bg-red-500 hover:bg-red-600 shadow-lg" onClick={deletePost} className="px-6 rounded-full">
+                  Delete
                 </Button>
-              </Link>
-              <Button bgColor="bg-red-500" onClick={deletePost}>
-                Delete
-              </Button>
+              </div>
+            )}
+          </div>
+
+          <div className="mb-10 text-center">
+            <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 leading-tight">
+              {post.title}
+            </h1>
+            <div className="flex items-center justify-center text-slate-500 font-medium tracking-wide uppercase text-sm">
+              <span>Published by Author</span>
+              <span className="mx-3 text-slate-300">|</span>
+              <span>5 Min Read</span>
             </div>
-          )}
+          </div>
+
+          <div className="prose prose-slate lg:prose-xl max-w-none text-slate-700 leading-relaxed">
+            {parse(post.content)}
+          </div>
         </div>
-        <div className="w-full mb-6">
-          <h1 className="text-2xl font-bold">{post.title}</h1>
-        </div>
-        <div className="browser-css">{parse(post.content)}</div>
       </Container>
     </div>
   ) : null;
