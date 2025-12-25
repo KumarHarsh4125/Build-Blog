@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 function Header() {
   const authStatus = useSelector((state) => state.auth.status);
+  const userData = useSelector((state) => state.auth.userData);
   const navigate = useNavigate();
 
   const navItems = [
@@ -27,6 +28,11 @@ function Header() {
     {
       name: "All Posts",
       slug: "/all-posts",
+      active: authStatus,
+    },
+    {
+      name: "Author",
+      slug: `/author/${userData?.$id}`,
       active: authStatus,
     },
     {

@@ -71,7 +71,9 @@ export default function Post() {
               {post.title}
             </h1>
             <div className="flex items-center justify-center text-slate-500 font-medium tracking-wide uppercase text-sm">
-              <span>Published by Author</span>
+              <Link to={`/author/${post.userId}`} className="hover:text-primary transition-colors">
+                Published by Author
+              </Link>
               <span className="mx-3 text-slate-300">|</span>
               <span>5 Min Read</span>
             </div>
